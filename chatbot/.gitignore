@@ -23,7 +23,7 @@ target/
 /nbproject/private/
 /nbbuild/
 /dist/
-/nbdist/
+/nbdi
 /.nb-gradle/
 build/
 !**/src/main/**/build/
@@ -34,3 +34,6 @@ build/
 /src/main/resources/schema.sql
 /src/main/resources/data.sql
 /src/main/resources/application.properties
+/.mvn/
+/mvnw
+/mvnw.cmd
