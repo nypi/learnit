@@ -1,0 +1,19 @@
+CREATE TABLE PUBLIC.Test(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE PUBLIC.Question(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_test INT NOT NULL,
+    id_correct_answer INT NOT NULL,
+    img_path VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_test) REFERENCES Test(id)
+);
+
+CREATE TABLE PUBLIC.Answer (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_question INT NOT NULL,
+    text VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_question) REFERENCES Question(id)
+);
