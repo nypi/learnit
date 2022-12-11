@@ -8,18 +8,22 @@ public class TestingWords {
     private final Deque<Word> wordQueue = new ArrayDeque<>();
     private final int numberOfTests;
 
-    public TestingWords(Collection<Word> userWords, int numberOfTests) {
+    public TestingWords(List<Word> userWords, int numberOfTests) {
         this.numberOfTests = numberOfTests;
+        if(userWords.size() == 0) {
+            System.out.println(-1);
+            return;
+        }
         choiceOfTests(userWords);
     }
 
-    public Word getNext(){
+    public Word next(){
         currentWord = wordQueue.poll();
         return currentWord;
     }
 
-    public void addWordInQueue(Word lastWord){
-        wordQueue.add(lastWord);
+    public void addCurrentWordInQueue(){
+        wordQueue.add(currentWord);
     }
 
     public Word getRandomWord(){
@@ -30,8 +34,8 @@ public class TestingWords {
         return result;
     }
 
-    private void choiceOfTests(Collection<Word> userWords){
-        userWords = (Collection<Word>) userWords.stream().sorted(Comparator.comparingInt(Word::getKnowledgeDegree));
+    private void choiceOfTests(List<Word> userWords){
+        Collections.sort(userWords, Comparator.comparingInt(Word::getKnowledgeDegree));
         int count = 0;
         for(Word word: userWords){
             if(count >= numberOfTests){

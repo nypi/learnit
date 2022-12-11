@@ -1,0 +1,3 @@
+Ваня;resources/apple.jpg;apple;яблоко;3
+Ваня;resources/cat.png;cat;кот;1
+Ваня;resources/toad.png;toad;жаба;1

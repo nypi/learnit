@@ -6,7 +6,7 @@ public class Word {
     private final String englishWord; // word on English
     public int knowledgeDegree; // the degree of knowledge of the word
 
-    public Word(String src, String russianWord, String englishWord, int knowledgeDegree) {
+    public Word(String src, String englishWord, String russianWord, int knowledgeDegree) {
         this.src = src;
         this.russianWord = russianWord;
         this.englishWord = englishWord;
