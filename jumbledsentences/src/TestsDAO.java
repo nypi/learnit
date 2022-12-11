@@ -35,6 +35,12 @@ class TestsDAO {
         }
     }
 
+    /**
+     * Получает все вопросы по заданной теме
+     * @param theme_id номер темы
+     * @return Список (List) объектов Question
+     * @throws SQLException Ошибка SQL
+     */
     List<Question> getQuestions(int theme_id) throws SQLException {
         List<Question> testQuestions = new ArrayList<>();
         try(Connection connection = DriverManager.getConnection(JDBC_URL,username,password);

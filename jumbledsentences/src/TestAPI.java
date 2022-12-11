@@ -9,7 +9,8 @@ public class TestAPI {
         //testsDAO.createTable();
         //testsDAO.importSalesFromCSV("C:\\Users\\Xenia\\Desktop\\Java croc school\\learnit\\jumbledsentences\\resources\\tempCSV\\temp.csv");
         User u = new User(1, "xen", 1);
-        TestingSystem.jumbledSentencesTest(u);
+        //TestingSystem.jumbledSentencesTest(u);
         System.out.println(u.getTestThemeId());
     }
+
 }
