@@ -19,6 +19,7 @@ public class Window extends JFrame {
     private Word currentWord;
     private final List<JButton> options = new ArrayList<>();
     private final Logger log = Logger.getLogger(Window.class.getName());
+    private final List<Word> learnedWords = new ArrayList<>();
 
     private final JPanel menu = new JPanel(), panel = new JPanel(), end = new JPanel();
     private final JLabel picLabel = new JLabel(), answer = new JLabel("");
@@ -78,15 +79,19 @@ public class Window extends JFrame {
         startButton.addActionListener(e -> {
             user.setUsername(txt1.getText());
 
-            try{
+            try {
                 user.findUserWords();
                 List<Word> userWords = user.getWords();
                 words = new TestingWords(userWords, Integer.parseInt(txt2.getText()));
                 testWindow();
-            }catch (IOException ex) {
+            } catch (IOException ex) {
                 log.info("файл " + ex.getMessage() + " не найден");
-            }catch (NumberFormatException ex){
-                log.info("неправильный формат введенного числа");
+            } catch (UserDoesntExistException ex) {
+                log.info(ex.getMessage());
+            } catch (NumberFormatException ex) {
+                log.info("Должно быть введено целочисленное значение");
+            } catch (InputNumberException ex) {
+                log.info(ex.getMessage());
             }
         });
     }
@@ -127,10 +132,11 @@ public class Window extends JFrame {
                     answer.setBackground(new Color(220, 100, 100));
                     answer.setOpaque(true);
                     answer.setText("Неправильный ответ");
-                }else{
+                } else {
                     answer.setBackground(new Color(100, 220, 100));
                     answer.setOpaque(true);
                     answer.setText("Правильный ответ!");
+                    addLearnedWord(currentWord);
                 }
                 try {
                     setButtons();
@@ -169,5 +175,14 @@ public class Window extends JFrame {
         for (int i = 0; i < 3; i++) {
             options.get(i).setText(curr.get(i));
         }
+    }
+
+    private void addLearnedWord(Word word) {
+        word.increaseKnowledgeDegree();
+        learnedWords.add(word);
+    }
+
+    public List<Word> getLearnedWords() {
+        return this.learnedWords;
     }
 }

@@ -8,7 +8,10 @@ public class TestingWords {
     protected final Deque<Word> wordQueue = new ArrayDeque<>();
     protected final int numberOfTests;
 
-    public TestingWords(List<Word> userWords, int numberOfTests) {
+    public TestingWords(List<Word> userWords, int numberOfTests) throws InputNumberException {
+        if(userWords.size() < numberOfTests || numberOfTests < 3){
+            throw new InputNumberException();
+        }
         this.numberOfTests = numberOfTests;
         choiceOfTests(userWords);
     }

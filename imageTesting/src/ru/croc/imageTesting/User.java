@@ -19,27 +19,26 @@ public class User {
         this.username = username;
     }
 
-    public void findUserWords() throws IOException {
+    public void findUserWords() throws IOException, UserDoesntExistException {
         BufferedReader file = new BufferedReader(new FileReader(src));
         String line, currentName;
         words.clear();
         String[] info;
         Word word;
-        while((line = file.readLine()) != null){
+        while ((line = file.readLine()) != null) {
             info = line.split(";");
             currentName = info[0];
-            word = new Word(info[1], info[2], info[3], Integer.parseInt(info[4]));
-            if(currentName.equals(username)){
+            word = new Word(info[0], info[1], info[2], info[3], Integer.parseInt(info[4]));
+            if (currentName.equals(username)) {
                 words.add(word);
             }
+        }
+        if (words.isEmpty()) {
+            throw new UserDoesntExistException(username);
         }
     }
 
     public List<Word> getWords() {
         return words;
-    }
-
-    public void updateWords(List<Word> words) {
-        this.words = words;
     }
 }
