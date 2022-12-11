@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String src;
+    private final String src;
     private String username;
     List<Word> words = new ArrayList<>();
 
@@ -20,8 +20,9 @@ public class User {
     }
 
     public void findUserWords() throws IOException {
-        BufferedReader file = new BufferedReader(new FileReader("resources/testInfo.txt"));
+        BufferedReader file = new BufferedReader(new FileReader(src));
         String line, currentName;
+        words.clear();
         String[] info;
         Word word;
         while((line = file.readLine()) != null){
@@ -36,5 +37,9 @@ public class User {
 
     public List<Word> getWords() {
         return words;
+    }
+
+    public void updateWords(List<Word> words) {
+        this.words = words;
     }
 }

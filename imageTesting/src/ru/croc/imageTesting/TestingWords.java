@@ -3,17 +3,13 @@ package ru.croc.imageTesting;
 import java.util.*;
 
 public class TestingWords {
-    private Word currentWord;
-    private final List<Word> testWords = new ArrayList<>();
-    private final Deque<Word> wordQueue = new ArrayDeque<>();
-    private final int numberOfTests;
+    protected Word currentWord;
+    protected final List<Word> testWords = new ArrayList<>();
+    protected final Deque<Word> wordQueue = new ArrayDeque<>();
+    protected final int numberOfTests;
 
     public TestingWords(List<Word> userWords, int numberOfTests) {
         this.numberOfTests = numberOfTests;
-        if(userWords.size() == 0) {
-            System.out.println(-1);
-            return;
-        }
         choiceOfTests(userWords);
     }
 
@@ -35,7 +31,7 @@ public class TestingWords {
     }
 
     private void choiceOfTests(List<Word> userWords){
-        Collections.sort(userWords, Comparator.comparingInt(Word::getKnowledgeDegree));
+        userWords.sort(Comparator.comparingInt(Word::getKnowledgeDegree));
         int count = 0;
         for(Word word: userWords){
             if(count >= numberOfTests){
