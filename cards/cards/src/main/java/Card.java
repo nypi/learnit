@@ -3,14 +3,25 @@ import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 
 public class Card {
-    private String russianWord;
-    private int number;
+    private String russianWord;//слово карточки, которое надо выучить
+    private int number;//номер карточки, задаётся при первом заполнении первой колоды
+    //создан для удобства пользователя, как в физических аналогах карт для запоминания
 
+    /**
+     * Создаёт  новый {@code Card}
+     * @param russianWord - слово карточки, которое надо выучить на английском языке
+     * @param number - номер карточки
+     */
     public Card(String russianWord, int number) {
         this.russianWord = russianWord;
         this.number = number;
     }
 
+    /**
+     * Перевод слова на английский
+     * @return - слово на английском
+     * @throws IOException - ошибка ввода/вывода
+     */
     private String translateToEnglish() throws IOException {
         Translate translate = new Translate();
         String translation = translate.translate(russianWord, "ru", "en");
@@ -18,6 +29,9 @@ public class Card {
         return translation.substring(19, translation.length() - 2);
     }
 
+    /**
+     * Вывод карточки для консольного приложения
+     */
     public void displayCard() {
         int stringLength = 30 + russianWord.length();
         System.out.println(StringUtils.rightPad("+", stringLength - 1, "-") + "+");
@@ -27,6 +41,10 @@ public class Card {
         System.out.println(StringUtils.rightPad("+", stringLength - 1, "-") + "+");
     }
 
+    /**
+     * Вывод перевода, чтобы пользователь смог проверить себя
+     * @throws IOException - ошибка ввода/вывода
+     */
     public void displayTranslatedCard() throws IOException {
         int stringLength = 30 + translateToEnglish().length();
         System.out.println(StringUtils.rightPad("+", stringLength - 1, "-") + "+");

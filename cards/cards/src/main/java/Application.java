@@ -10,6 +10,9 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         Deck firstDeck = new Deck();
+        Deck secondtDeck = new Deck(1);
+        Deck thirdDeck = new Deck(2);
+
 
         switch (choice) {
             case (1):
@@ -33,6 +36,26 @@ public class Application {
             int getCardTranslation = scanner.nextInt();
             if (getCardTranslation == 1) {
                 card.displayTranslatedCard();
+            }
+            System.out.println("Вы правильно перевели это слово?/n" +
+                    "1 - правильно перевел/n" +
+                    "2 - неправильно перевел/n" +
+                    "3 - удалить эту карточку/n" +
+                    "4 - добавить новую карточку/n" +
+                    "5 - закончить обучение");
+            choice = scanner.nextInt();
+            switch (choice) {
+                case (1):
+
+
+                case (2):
+
+
+                case (3):
+
+
+
+
             }
 
         }
