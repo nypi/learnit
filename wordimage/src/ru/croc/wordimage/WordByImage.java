@@ -3,8 +3,10 @@ package ru.croc.wordimage;
 import ru.croc.wordimage.dao.TestDAO;
 import ru.croc.wordimage.entity.Answer;
 import ru.croc.wordimage.entity.Question;
+import ru.croc.wordimage.entity.Result;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class WordByImage {
@@ -14,16 +16,20 @@ public class WordByImage {
      * Запуск теста: по изображению выбрать правильное слово из списка вариантов.
      */
     public void runTestWordByImage() throws SQLException, ClassNotFoundException {
-        testDAO.getAllTest() //вывод списка вопросов
-                .forEach(test -> System.out.println("Test № " + test.id() + ". " + test.name()));
-
         try(Scanner in = new Scanner(System.in)) {
+            System.out.print("Введите id: ");
+            String idUser = in.next();
+
+            testDAO.getAllTest() //вывод списка вопросов
+                    .forEach(test -> System.out.println("Test № " + test.id() + ". " + test.name()));
+
             System.out.print("Введите номер теста, который хотите пройти: ");
             int numberTest = in.nextInt();
             List<Question> questions = testDAO.getQuestionList(numberTest);
             int result = testResult(questions, in);
-
             System.out.println("Результат: " + result + " из " + questions.size());
+
+            testDAO.saveResult(new Result(idUser, numberTest, result, LocalDateTime.now()));
         }
     }
 

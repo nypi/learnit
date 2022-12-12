@@ -17,3 +17,12 @@ CREATE TABLE PUBLIC.Answer (
     text VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_question) REFERENCES Question(id)
 );
+
+CREATE TABLE PUBLIC.Result (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_user VARCHAR(255) NOT NULL,
+    id_test INT NOT NULL,
+    score INT NOT NULL,
+    date_time DATETIME NOT NULL,
+    FOREIGN KEY (id_test) REFERENCES Test(id)
+);
