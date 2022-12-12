@@ -8,16 +8,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class TestAPI {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        UsersDAO usersDAO = new UsersDAO();
-        System.out.println(usersDAO.findUser(2).getTestLessonId());
-        startTest(2);
-        System.out.println(usersDAO.findUser(2).getTestLessonId());
-        startTest(22);
-    }
 
     /**
-     * Провести тест по теме
+     * Провести тест по теме. В случае успешного прохождения теста
+     * пользователь переходит к следующей теме.
      * @param userId        id пользователя
      * @return              true, если тест пройден успешно
      */
