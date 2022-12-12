@@ -12,11 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDao {
-    static final String DB_URL = "jdbc:h2:C:\\Users\\ninop\\IdeaProjects\\tester\\db";
-    static final String USER = "sa";
-    static final String PASS = "sa";
+    DbProperties properties = new DbProperties();
+    private String DB_URL;
+    private String USER;
+    private String PASS;
 
     ObjectMapper mapper = new ObjectMapper();
+
+    public TestDao() throws IOException {
+        this.DB_URL = properties.getHost();
+        this.USER = properties.getLogin();
+        this.PASS = properties.getPassword();
+    }
 
     public Test getTestByName(String name) throws SQLException, JsonProcessingException {
         List<Question> questions = new ArrayList<>();

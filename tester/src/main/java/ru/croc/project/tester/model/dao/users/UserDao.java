@@ -11,16 +11,20 @@ import java.sql.*;
 import java.util.List;
 
 public class UserDao {
-    static final String JDBC_DRIVER = "org.h2.Driver";
-    static final String DB_URL = "jdbc:h2:C:\\Users\\ninop\\IdeaProjects\\tester\\db";
-
-    static final String USER = "sa";
-    static final String PASS = "sa";
+    DbProperties properties = new DbProperties();
+    private String DB_URL;
+    private String USER;
+    private String PASS;
 
     ObjectMapper mapper = new ObjectMapper();
 
+    public UserDao() throws IOException {
+        this.DB_URL = properties.getHost();
+        this.USER = properties.getLogin();
+        this.PASS = properties.getPassword();
+    }
+
     public User isExists(String id) throws ClassNotFoundException, SQLException, JsonProcessingException {
-        Class.forName(JDBC_DRIVER);
         String userId = null;
         String serialized = null;
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS)) {
@@ -42,8 +46,6 @@ public class UserDao {
     }
 
     public void updateInfo(String id, List<UserTestInformation> information) throws ClassNotFoundException, SQLException, JsonProcessingException {
-        Class.forName(JDBC_DRIVER);
-
         ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
         String serialized = mapper.writeValueAsString(information);
 

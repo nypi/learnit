@@ -26,6 +26,9 @@ public class MainPageController {
     private User user;
     private TestDao testDao = new TestDao();
 
+    public MainPageController() throws IOException {
+    }
+
     public void setUser(User user) {
         this.user = user;
     }

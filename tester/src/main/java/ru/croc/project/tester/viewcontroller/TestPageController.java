@@ -36,6 +36,9 @@ public class TestPageController {
 
     int rightAnswersCount = 0;
 
+    public TestPageController() throws IOException {
+    }
+
     public void setTest(Test test) {
         this.test = test;
     }
