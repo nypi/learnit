@@ -17,6 +17,7 @@ public class Demo {
                     /test - начать тест
                     /putNewTest - предполагается наличие права доступа
                     /exit - выйти""");
+
             int ourID = 5;          //идентификатор пользователя, проходящего тест
             switch (in.nextLine()) {
                 case "/test" -> TestAPI.startTest(ourID);
