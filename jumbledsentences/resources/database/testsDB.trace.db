@@ -1,0 +1,47 @@
+2022-12-11 23:24:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "engSentence" не найден
+Column "engSentence" not found [42122-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3492)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:301)
+	at testingsystem.data.dao.TestsDAO.getQuestions(testingsystem.data.dao.TestsDAO.java:44)
+	at testingsystem.TestAPI.main(testingsystem.TestAPI.java:11)
+2022-12-11 23:27:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "ENGSENTENCE" не найден
+Column "ENGSENTENCE" not found; SQL statement:
+INSERT INTO TESTS (theme_id, theme, engSentence, ruSentence) VALUES (1, 'family', 'My mom is from Canada', 'Моя мама из Канады'); [42122-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:749)
+	at org.h2.command.Parser.parseColumn(Parser.java:1256)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1241)
+	at org.h2.command.Parser.parseInsert(Parser.java:1641)
+	at org.h2.command.Parser.parsePrepared(Parser.java:814)
+	at org.h2.command.Parser.parse(Parser.java:689)
+	at org.h2.command.Parser.parse(Parser.java:661)
+	at org.h2.command.Parser.prepareCommand(Parser.java:569)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:631)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:554)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:186)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:143)
+	at testingsystem.data.dao.TestsDAO.createQuestion(testingsystem.data.dao.TestsDAO.java:79)
+	at testingsystem.data.dao.TestsDAO.importSalesFromCSV(testingsystem.data.dao.TestsDAO.java:63)
+	at testingsystem.TestAPI.main(testingsystem.TestAPI.java:10)
+2022-12-12 21:04:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "drop table [*]if not exists tests;"; ожидалось "identifier"
+Syntax error in SQL statement "drop table [*]if not exists tests;"; expected "identifier"; SQL statement:
+drop table if not exists tests; [42001-214]
+2022-12-12 21:05:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "INSERT INTO TESTS (lesson_id, eng_sentence, ru_sentence) VALUES (1', 'M', 'mo[*]');"
+Syntax error in SQL statement "INSERT INTO TESTS (lesson_id, eng_sentence, ru_sentence) VALUES (1', 'M', 'mo[*]');"; SQL statement:
+INSERT INTO TESTS (lesson_id, eng_sentence, ru_sentence) VALUES (1', 'M', 'mo'); [42000-214]
+2022-12-12 21:06:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "INSERT INTO TESTS (lesson_id, eng_sentence, ru_sentence) VALUES (1', 'My mom is from Canada', 'Моя мама из Канады[*]');"
+Syntax error in SQL statement "INSERT INTO TESTS (lesson_id, eng_sentence, ru_sentence) VALUES (1', 'My mom is from Canada', 'Моя мама из Канады[*]');"; SQL statement:
+INSERT INTO TESTS (lesson_id, eng_sentence, ru_sentence) VALUES (1', 'My mom is from Canada', 'Моя мама из Канады'); [42000-214]
