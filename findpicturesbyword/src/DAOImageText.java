@@ -90,8 +90,10 @@ public class DAOImageText {
 
     public void updateRecord() throws SQLException, FileNotFoundException {
         try (Statement statement = con.createStatement()) {
-            System.out.println("Choose record to change:");
-            String sqlQuery = "SELECT * FROM ImageText;";
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Write name of work:");
+            String nameOfWork = sc.nextLine();
+            String sqlQuery = "SELECT * FROM ImageText WHERE NameWork = '"+nameOfWork+"';";
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             ArrayList<Long> allIds = new ArrayList<>();
             int i = 1;
@@ -100,45 +102,48 @@ public class DAOImageText {
                 System.out.println(i + ": Name of work: " + resultSet.getString(3) + " Saved Text: " + resultSet.getString(4));
                 i++;
             }
-            System.out.println(allIds);
-            Scanner sc = new Scanner(System.in);
-            i = Integer.parseInt(sc.nextLine());
-            long id = allIds.get(i - 1);
-            System.out.println("Choose attribute for change: 1 - Photo, 2 - Name, 3 - Text");
-            i = Integer.parseInt(sc.nextLine());
-            if (i == 1) {
-                System.out.println("Choose new image:");
-                JFileChooser jFile = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Image", "jpg", "png");
-                jFile.addChoosableFileFilter(filter);
-                int result = jFile.showOpenDialog(null);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    try (PreparedStatement preparedStatement = con.prepareStatement("UPDATE ImageText SET Picture = ? WHERE Id = ?;");) {
-                        File selectedFile = jFile.getSelectedFile();
-                        FileInputStream fileInputStream = new FileInputStream(selectedFile);
-                        preparedStatement.setBinaryStream(1, fileInputStream);
+            if(i != 1) {
+                System.out.println("Choose record to change:");
+                i = Integer.parseInt(sc.nextLine());
+                long id = allIds.get(i - 1);
+                System.out.println("Choose attribute for change: 1 - Photo, 2 - Name, 3 - Text");
+                i = Integer.parseInt(sc.nextLine());
+                if (i == 1) {
+                    System.out.println("Choose new image:");
+                    JFileChooser jFile = new JFileChooser();
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Image", "jpg", "png");
+                    jFile.addChoosableFileFilter(filter);
+                    int result = jFile.showOpenDialog(null);
+                    if (result == JFileChooser.APPROVE_OPTION) {
+                        try (PreparedStatement preparedStatement = con.prepareStatement("UPDATE ImageText SET Picture = ? WHERE Id = ?;");) {
+                            File selectedFile = jFile.getSelectedFile();
+                            FileInputStream fileInputStream = new FileInputStream(selectedFile);
+                            preparedStatement.setBinaryStream(1, fileInputStream);
+                            preparedStatement.setLong(2, id);
+                            preparedStatement.executeUpdate();
+                        }
+                    } else {
+                        System.out.println("Choose correct file!");
+                    }
+                } else if (i == 2) {
+                    try (PreparedStatement preparedStatement = con.prepareStatement("UPDATE ImageText SET NameWork = ? WHERE Id = ?;");) {
+                        System.out.println("Write new name of work:");
+                        String str = sc.nextLine();
+                        preparedStatement.setString(1, str);
                         preparedStatement.setLong(2, id);
                         preparedStatement.executeUpdate();
                     }
-                } else {
-                    System.out.println("Choose correct file!");
+                } else if (i == 3) {
+                    try (PreparedStatement preparedStatement = con.prepareStatement("UPDATE ImageText SET TextOfPicture = ? WHERE Id = ?;");) {
+                        System.out.println("Write new text for picture:");
+                        String str = sc.nextLine();
+                        preparedStatement.setString(1, str.toUpperCase());
+                        preparedStatement.setLong(2, id);
+                        preparedStatement.executeUpdate();
+                    }
                 }
-            } else if (i == 2) {
-                try (PreparedStatement preparedStatement = con.prepareStatement("UPDATE ImageText SET NameWork = ? WHERE Id = ?;");) {
-                    System.out.println("Write new name of work:");
-                    String str = sc.nextLine();
-                    preparedStatement.setString(1, str);
-                    preparedStatement.setLong(2, id);
-                    preparedStatement.executeUpdate();
-                }
-            } else if (i == 3) {
-                try (PreparedStatement preparedStatement = con.prepareStatement("UPDATE ImageText SET TextOfPicture = ? WHERE Id = ?;");) {
-                    System.out.println("Write new text for picture:");
-                    String str = sc.nextLine();
-                    preparedStatement.setString(1, str.toUpperCase());
-                    preparedStatement.setLong(2, id);
-                    preparedStatement.executeUpdate();
-                }
+            } else {
+                System.out.println("There are no records with that name!");
             }
         }
     }
