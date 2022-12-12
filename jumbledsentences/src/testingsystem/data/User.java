@@ -1,5 +1,9 @@
 package testingsystem.data;
 
+import testingsystem.data.dao.UsersDAO;
+
+import java.sql.SQLException;
+
 public class User {
     private final int id;
     private String userName;
@@ -9,6 +13,19 @@ public class User {
         this.id = id;
         this.userName = userName;
         this.testLessonId = testLessonId;
+    }
+
+    /**
+     * Возвращает пользователя из базы данных. Если такого
+     * пользователя нет, возвращает null
+     * @param id идентификатор пользователя
+     * @return объект класса User найденного пользователя
+     * @throws ClassNotFoundException Проблемы с доступом к БД
+     * @throws SQLException Ошибка SQL
+     */
+    static public User getUserFromDB(int id) throws ClassNotFoundException, SQLException {
+        UsersDAO usersDAO = new UsersDAO();
+        return usersDAO.findUser(id);
     }
 
     public int getId() {

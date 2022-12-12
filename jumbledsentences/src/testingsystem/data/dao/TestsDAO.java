@@ -1,4 +1,4 @@
-package testingsystem.data;
+package testingsystem.data.dao;
 
 import testingsystem.data.Question;
 
@@ -9,13 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestsDAO {
-
-    private final String JDBC_URL = "jdbc:h2:file:./jumbledsentences/resources/database/testsDB";
-    private final String JDBC_CLASSNAME = "org.h2.Driver";
-    private final String username = "jumbled";
-    private final String password = "tests";
-
+public class TestsDAO extends AttributesDAO{
 
     public TestsDAO() throws ClassNotFoundException {
         Class.forName(JDBC_CLASSNAME);

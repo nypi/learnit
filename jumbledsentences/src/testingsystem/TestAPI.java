@@ -1,22 +1,36 @@
 package testingsystem;
 
-import testingsystem.data.TestsDAO;
+import testingsystem.data.dao.TestsDAO;
 import testingsystem.data.User;
+import testingsystem.data.dao.UsersDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class TestAPI {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
-        startTest(1, "Xen", 12);
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        UsersDAO usersDAO = new UsersDAO();
+        System.out.println(usersDAO.findUser(2).getTestLessonId());
+        startTest(2);
+        System.out.println(usersDAO.findUser(2).getTestLessonId());
+        startTest(22);
     }
 
-    public static boolean startTest(int userId,
-                                    String userName,
-                                    int testLessonId) {
-        User student = new User(userId, userName, testLessonId);
+    /**
+     * Провести тест по теме
+     * @param userId        id пользователя
+     * @return              true, если тест пройден успешно
+     */
+    public static boolean startTest(int userId) {
         try {
+            User student = User.getUserFromDB(userId);
+            if(student == null){
+                System.out.println("Такого студента не нашлось.");
+                return false;
+            }
             TestingSystem.jumbledSentencesTestConsole(student);
+            UsersDAO usersDAO = new UsersDAO();
+            usersDAO.updateUser(student);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Сервис временно недоступен.");
             return false;
@@ -24,13 +38,25 @@ public class TestAPI {
         return true;
     }
 
+    /**
+     * Добавить в систему новый тест
+     * @param lesson_id Номер урока
+     * @param path Путь до файла со предложениями.
+     *             Формат файла:
+     *             Файл должен представлять собой набор английских и
+     *             русских предложений, разделенных точкой.
+     *             Апострофы должны дублироваться
+     * @return     true/false Успешно ли добавлено значение
+     * @throws IOException      Возникли проблемы с доступом к файлу
+     * @throws SQLException     Возникли проблемы с SQL. Проверьте форматирование файла
+     */
     public static boolean putNewTest(int lesson_id,
                                      String path) throws IOException, SQLException {
         try {
             TestsDAO testsDAO = new TestsDAO();
             testsDAO.createNewTest(lesson_id, path);
         } catch (SQLException sqlExc) {
-           throw new SQLException("A SQL error occurred. Please, check your file's formatting", sqlExc);
+           throw new SQLException("Пожалуйста, проверьте правильность форматирования файла", sqlExc);
         } catch (ClassNotFoundException e) {
             System.out.println("Сервис временно недоступен.");
             return false;

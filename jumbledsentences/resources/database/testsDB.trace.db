@@ -7,7 +7,7 @@ Column "engSentence" not found [42122-214]
 	at org.h2.message.DbException.get(DbException.java:199)
 	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3492)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:301)
-	at testingsystem.data.TestsDAO.getQuestions(testingsystem.data.TestsDAO.java:44)
+	at testingsystem.data.dao.TestsDAO.getQuestions(testingsystem.data.dao.TestsDAO.java:44)
 	at testingsystem.TestAPI.main(testingsystem.TestAPI.java:11)
 2022-12-11 23:27:14 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "ENGSENTENCE" не найден
@@ -30,8 +30,8 @@ INSERT INTO TESTS (theme_id, theme, engSentence, ruSentence) VALUES (1, 'family'
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
 	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:186)
 	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:143)
-	at testingsystem.data.TestsDAO.createQuestion(testingsystem.data.TestsDAO.java:79)
-	at testingsystem.data.TestsDAO.importSalesFromCSV(testingsystem.data.TestsDAO.java:63)
+	at testingsystem.data.dao.TestsDAO.createQuestion(testingsystem.data.dao.TestsDAO.java:79)
+	at testingsystem.data.dao.TestsDAO.importSalesFromCSV(testingsystem.data.dao.TestsDAO.java:63)
 	at testingsystem.TestAPI.main(testingsystem.TestAPI.java:10)
 2022-12-12 21:04:49 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "drop table [*]if not exists tests;"; ожидалось "identifier"
