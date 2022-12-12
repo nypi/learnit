@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/9e16ef20-e58d-45cf-8cdf-99b80e7ed959/console.sql" dialect="H2" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ru/croc/project/tester/model/dao/users/UserDao.java" dialect="GenericSQL" />
+  </component>
+</project>
