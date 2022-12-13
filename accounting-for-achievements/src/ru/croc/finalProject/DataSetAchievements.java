@@ -10,15 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DataSetAchievements {
-    /*
-     Объект данного класса хранит достижения в виде Map
-     Ключ - граничное число + название метрики прогресса
-     Значение - название достижения
-     Список достижений будет читаться из файла
-    */
-    private Map<String, ArrayList<Integer>> achievementConditions = new HashMap<>();
-    private Map<String, String> nameOfAchievements = new HashMap<>();
-    private Map<String, Integer> auxiliaryMap = new HashMap<>();
+    private Map<String, ArrayList<Integer>> achievementConditions = new HashMap<>(); // структура мапы : МЕТРИКА - лист с граничными достиженями  для этой метрики
+    private Map<String, String> nameOfAchievements = new HashMap<>(); // структура мапы : МЕТРИКА+ГРАНИЧНОЕ_ЗНАЧЕНИЕ - Название достижения
+    private Map<String, Integer> auxiliaryMap = new HashMap<>(); // структура мапы : Название_достижения - граничено значение для его получения
 
     public DataSetAchievements(String path) throws IOException {
         Path pathToTheAchievements = Paths.get(path);

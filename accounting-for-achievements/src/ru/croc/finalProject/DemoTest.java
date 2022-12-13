@@ -14,11 +14,12 @@ public class DemoTest {
         2. Password
         3. User
          */
+
         if (args.length < 3) {
             throw new IllegalArgumentException("Некорректно введены данные для доступа к БД");
         }
         WorkWithAchievements test = new WorkWithAchievements("C:/Users/stepa/IdeaProjects/Croc/src/ru/croc/finalProject/Achievements.txt", args);
-        //test.updateAchievements(4 , "TOPICS");
-        test.getAllInformation(4);
+        Menu test2 = new Menu();
+        test2.menu(test);
     }
 }
