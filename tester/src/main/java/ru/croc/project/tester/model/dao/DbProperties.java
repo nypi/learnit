@@ -13,7 +13,8 @@ public class DbProperties {
     private final String password;
 
     public DbProperties() throws IOException {
-        fis = new FileInputStream("src/main/resources/config.properties");
+
+        fis = new FileInputStream("src/main/resources/ru/croc/project/tester/properties/config.properties");
         properties.load(fis);
 
         this.host = properties.getProperty("db.host");
