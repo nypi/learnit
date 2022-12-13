@@ -42,17 +42,39 @@ Hello, Ctacek. You use service of word matcher!
 MENU:
 1. Start
 2. End
-   1
-   Write one of the topic's names: eat, it, sport, weather
-   eat
-   [eat] [We] [food] [healthy] [need] [time] [right] [at]
-   f
-   Wrong, try again! You have 2 attempts
-   f
-   Wrong, try again! You have 1 attempts
-   f
+-> 1
+Write one of the topic's names: eat, it, sport, weather
+-> eat
+[eat] [We] [food] [healthy] [need] [time] [right] [at]
+-> f
+Wrong, try again! You have 2 attempts
+-> f
+Wrong, try again! You have 1 attempts
+-> f
 
 Today is not your day :c
+```
+
+### Database
+
+#### Таблица sentences
+
+Внутри таблицы хранятся предложения, разбитые на темы. Предложения добавляются заранее, но в разработке
+добавление преложений и их модерация.
+
+Таблица имеет следующие столбцы:
+- id - Номер вопроса, заполняется автоматически.
+- topic - Тема вопроса. Не может быть NULL
+- sentence - Предложение. Не может быть NULL
+- secontcorrect - Вторая вариация правильного предложения 
+(Часто английские предложения имеют два и более различных способов написания) Может быть NULL
+- (NUMBERcorrect () Могут быть NULL) - В планах
+
+```
+TESTS
++---------+---------------+-------------------+-----------------+
+|   id    |   lesson_id   |   eng_sentence    |   ru_sentence   |
++---------+---------------+-------------------+-----------------+
 ```
 
 ### Developer
