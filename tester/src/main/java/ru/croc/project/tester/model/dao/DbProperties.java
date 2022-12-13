@@ -14,7 +14,7 @@ public class DbProperties {
 
     public DbProperties() throws IOException {
 
-        fis = new FileInputStream("src/main/resources/ru/croc/project/tester/model/dao/config.properties");
+        fis = new FileInputStream("src/main/resources/ru/croc/project/tester/properties/config.properties");
         properties.load(fis);
 
         this.host = properties.getProperty("db.host");
