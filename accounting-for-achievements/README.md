@@ -11,4 +11,8 @@
 
 ![метрики достижений drawio](https://user-images.githubusercontent.com/110686828/207195896-cd0f973c-b69b-4f5a-b64a-a1c9f896a066.png)
 
+**ТЕХНИЧЕСКОЕ ОПИСАНИЕ**
+
+
+
 
