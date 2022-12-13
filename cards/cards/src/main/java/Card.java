@@ -9,16 +9,22 @@ public class Card {
 
     /**
      * Создаёт  новый {@code Card}
+     *
      * @param russianWord - слово карточки, которое надо выучить на английском языке
-     * @param number - номер карточки
+     * @param number      - номер карточки
      */
     public Card(String russianWord, int number) {
         this.russianWord = russianWord;
         this.number = number;
     }
 
+    public String getRussianWord() {
+        return russianWord;
+    }
+
     /**
      * Перевод слова на английский
+     *
      * @return - слово на английском
      * @throws IOException - ошибка ввода/вывода
      */
@@ -43,6 +49,7 @@ public class Card {
 
     /**
      * Вывод перевода, чтобы пользователь смог проверить себя
+     *
      * @throws IOException - ошибка ввода/вывода
      */
     public void displayTranslatedCard() throws IOException {
