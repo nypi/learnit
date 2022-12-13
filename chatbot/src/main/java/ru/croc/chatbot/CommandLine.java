@@ -153,11 +153,13 @@ public class CommandLine {
             }
         }
         if (count == 0) {
-            sendMessage(chatId, "У вас еще нет статистики!\nПроверь себя - /quiz \uD83D\uDE09");
+            sendMessage(chatId, "*У вас еще нет статистики!*\nПроверь себя - /quiz \uD83D\uDE09");
         } else {
-            sendMessage(chatId, "Твоя статистика \uD83D\uDCC8:");
-            sendMessage(chatId, "Всего пройдено тестов \uD83D\uDD8B:" + count);
-            sendMessage(chatId, "Всего правильных ответов \uD83D\uDC4D:" + rightAnswer);
+            average = rightAnswer / count;
+            sendMessage(chatId, "*\uD83D\uDCC8 Твоя статистика:*\n\n"
+                    + "Всего пройдено тестов: *" + count + "*\n"
+                    + "Всего правильных ответов: *" + rightAnswer + "*\n"
+                    + "Средний балл: *" + average + "*");
         }
     }
 
@@ -166,7 +168,7 @@ public class CommandLine {
      * @param chatId chatID
      */
     public void getHelp(long chatId) throws TelegramApiException {
-        sendMessage(chatId, "Я бот Learn It \uD83D\uDC23! Я помогу тебе в изучении английского языка!\uD83C\uDDEC\uD83C\uDDE7\n"
+        sendMessage(chatId, "*Я бот Learn It \uD83D\uDC23! Я помогу тебе в изучении английского языка!\uD83C\uDDEC\uD83C\uDDE7*\n\n"
                 + "Что я могу:\n/statistics - Моя статистика\n/quiz - Запустить тест\n/help - Помощь");
     }
 

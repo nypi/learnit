@@ -54,7 +54,7 @@ public class TranslatorQuiz implements Quiz {
         rowsInLine.add(rowInLine);
         markupInLine.setKeyboard(rowsInLine);
         message.setReplyMarkup(markupInLine);
-        sendMessage(message, chatId, "Как переводиться слово: " + translationQuestion.getQuestion() + "?");
+        sendMessage(message, chatId, "Как переводиться слово: *" + translationQuestion.getQuestion() + "*?");
     }
 
     /**

@@ -28,7 +28,7 @@ public class LearnitTelegramBot extends TelegramLongPollingBot {
                 String userText = update.getMessage().getText();
                 switch (userText) {
                     case "/start":
-                        sendMessage(getMessage(), chatId, "Привет! Я бот Learn It! \uD83D\uDC23\nВведите /help - для помощи");
+                        sendMessage(getMessage(), chatId, "*Привет! Я бот Learn It! \uD83D\uDC23*\nВведите /help - для помощи");
                         break;
                     case "/statistics":
                         commandLine.getStats(chatId);
@@ -45,7 +45,7 @@ public class LearnitTelegramBot extends TelegramLongPollingBot {
                         commandLine.getQuiz(chatId);
                         break;
                     default:
-                        sendMessage(getMessage(), chatId, "Я не понимаю эту команду \uD83D\uDE22\nВведите /help - для помощи");
+                        sendMessage(getMessage(), chatId, "*\uD83D\uDE22 Я не понимаю эту команду*\nВведите /help - для помощи");
                         break;
                 }
             } catch (TelegramApiException | InstantiationException | IllegalAccessException |
@@ -87,6 +87,7 @@ public class LearnitTelegramBot extends TelegramLongPollingBot {
             throws TelegramApiException {
         message.setChatId(chatId);
         message.setText(textMessage);
+        message.enableMarkdown(true);
         execute(message);
     }
 
