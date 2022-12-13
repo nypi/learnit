@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuizResults">
+
+    <ImageView
+        android:id="@+id/congratulations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/congratulations" />
+
+    <TextView
+        android:id="@+id/title_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_below="@id/congratulations"
+        android:gravity="center"
+        android:text="@string/your_result"
+        android:fontFamily="@font/catamaran_light"
+        android:textColor="@color/big_stone"
+        android:textSize="34sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/title_result"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/correctAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correct answers: 0"
+            android:fontFamily="@font/catamaran_light"
+            android:textColor="@color/big_stone"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/incorrectAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Incorrect answers: 0"
+            android:fontFamily="@font/catamaran_light"
+            android:textColor="@color/big_stone"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/goBackMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/round_back_big_stone_30"
+        android:fontFamily="@font/catamaran_light"
+        android:text="@string/menu"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</RelativeLayout>
