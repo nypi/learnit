@@ -73,7 +73,8 @@ public class WordMatcher {
             }
             counter++;
         }
-        System.out.println(flag);
+        if (flag) System.out.println("\nCongratulations, that's right");
+        else System.out.println("\nToday is not your day :c\n");
 
     }
 
