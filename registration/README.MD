@@ -7,6 +7,21 @@
 ## Инструкция по запуску микросервиса
 Вам потребуется java не ниже 17 версии
 
+Для запуска вы можете скачать [croc-registrarion.jar](https://github.com/nypi/learnit/blob/main/registration/croc-registration.jar), который располагается по адресу :
+```
+https://github.com/nypi/learnit/blob/main/registration/croc-registration.jar
+```
+Затем вам необходимо, перейти в папку с jar файлом и прописать следующую команду:
+```
+java -jar croc-registration.jar
+```
+(В случае отказа в доступе на Linux, можете попробовать перенести в другую папку)
+
+Также вы можете происать полный путь до jar файла
+```
+java -jar /your/directory/croc-registration.jar
+```
+
 Для запуска вам необходимо склонировать текущий репозиторий и загрузить зависимости из файла pom.xml
 
 ## Описание микросервиса
