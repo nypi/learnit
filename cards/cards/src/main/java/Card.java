@@ -3,8 +3,8 @@ import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 
 public class Card {
-    private String russianWord;//слово карточки, которое надо выучить
-    private int number;//номер карточки, задаётся при первом заполнении первой колоды
+    private final String russianWord;//слово карточки, которое надо выучить
+    private final int number;//номер карточки, задаётся при первом заполнении первой колоды
     //создан для удобства пользователя, как в физических аналогах карт для запоминания
 
     /**
@@ -18,10 +18,6 @@ public class Card {
         this.number = number;
     }
 
-    public String getRussianWord() {
-        return russianWord;
-    }
-
     /**
      * Перевод слова на английский
      *
@@ -31,7 +27,6 @@ public class Card {
     private String translateToEnglish() throws IOException {
         Translate translate = new Translate();
         String translation = translate.translate(russianWord, "ru", "en");
-
         return translation.substring(19, translation.length() - 2);
     }
 
@@ -41,9 +36,12 @@ public class Card {
     public void displayCard() {
         int stringLength = 30 + russianWord.length();
         System.out.println(StringUtils.rightPad("+", stringLength - 1, "-") + "+");
-        System.out.println(StringUtils.center(StringUtils.center("Карточка № " + number, stringLength - 2), stringLength, "|"));
-        System.out.println(StringUtils.center(StringUtils.center(" ", stringLength - 2), stringLength, "|"));
-        System.out.println(StringUtils.center(StringUtils.center("Слово: " + russianWord, stringLength - 2), stringLength, "|"));
+        System.out.println(StringUtils.center(StringUtils.center("Карточка № " + number,
+                stringLength - 2), stringLength, "|"));
+        System.out.println(StringUtils.center(StringUtils.center(" ", stringLength - 2),
+                stringLength, "|"));
+        System.out.println(StringUtils.center(StringUtils.center("Слово: " + russianWord,
+                stringLength - 2), stringLength, "|"));
         System.out.println(StringUtils.rightPad("+", stringLength - 1, "-") + "+");
     }
 
@@ -55,9 +53,12 @@ public class Card {
     public void displayTranslatedCard() throws IOException {
         int stringLength = 30 + translateToEnglish().length();
         System.out.println(StringUtils.rightPad("+", stringLength - 1, "-") + "+");
-        System.out.println(StringUtils.center(StringUtils.center("Карточка № " + number, stringLength - 2), stringLength, "|"));
-        System.out.println(StringUtils.center(StringUtils.center(" ", stringLength - 2), stringLength, "|"));
-        System.out.println(StringUtils.center(StringUtils.center("Слово на англиском: " + translateToEnglish(), stringLength - 2), stringLength, "|"));
+        System.out.println(StringUtils.center(StringUtils.center("Карточка № " + number,
+                stringLength - 2), stringLength, "|"));
+        System.out.println(StringUtils.center(StringUtils.center(" ", stringLength - 2),
+                stringLength, "|"));
+        System.out.println(StringUtils.center(StringUtils.center("Слово на англиском: " +
+                translateToEnglish(), stringLength - 2), stringLength, "|"));
         System.out.println(StringUtils.rightPad("+", stringLength - 1, "-") + "+");
     }
 

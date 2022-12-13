@@ -2,17 +2,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class Deck implements Iterable<Card> {
     private static int wordCounter = 0;//счетчик слов, нужен, чтобы задавать номера карточкам
-    private long lastShowTime = 0L;//время последнего показа карточек из этой колоды
+    private long lastShowTime = Long.MIN_VALUE;//время последнего показа карточек из этой колоды
     private long interval;//интервал, через который будет повторение слов из этой колоды
     private final List<Card> cards = new ArrayList<>();//карты колоды
-    private boolean delIndex;
+
+    private final List<Card> removeCards = new ArrayList<>();//карточки, которые являются кандидатами на удаление
 
 
     /**
@@ -21,7 +22,7 @@ public class Deck implements Iterable<Card> {
      * @param minuteInterval - интервал, через который будет повторение слов из этой колоды в минутах
      */
     public Deck(long minuteInterval) {
-        this.interval = minuteInterval * 60000;
+        this.interval = minuteInterval * 60000;//перевод в миллисекунды
 
     }
 
@@ -51,17 +52,51 @@ public class Deck implements Iterable<Card> {
 
     }
 
-    public int getWordQuantity() {
+    /**
+     * получить размер колоды
+     *
+     * @return - размер колоды
+     */
+    public int getDeckQuantity() {
         return cards.size();
     }
 
+    /**
+     * Добавление новой карты в колоду по слову
+     *
+     * @param newWord
+     */
     public void addNewCard(String newWord) {
         wordCounter += 1;
         cards.add(new Card(newWord, wordCounter));
     }
 
+    /**
+     * Добавление новой карты в колоду
+     *
+     * @param newCard
+     */
     public void addNewCard(Card newCard) {
         cards.add(newCard);
+    }
+
+    /**
+     * Подготовить карту к удалению
+     *
+     * @param card
+     */
+    public void prepareCardDeletion(Card card) {
+        removeCards.add(card);
+    }
+
+    /**
+     * удалить все отложенные карты из колоды
+     */
+    public void deleteUnnecessaryCards() {
+        for (Card card : removeCards) {
+            cards.remove(card);
+        }
+        removeCards.clear();
     }
 
 
@@ -74,7 +109,7 @@ public class Deck implements Iterable<Card> {
     public Iterator<Card> iterator() {
         return new Iterator<>() {
 
-            private static int currentIndex = 0;
+            private int currentIndex = 0;
 
 
             /**
@@ -83,9 +118,13 @@ public class Deck implements Iterable<Card> {
              */
             @Override
             public boolean hasNext() {
-                boolean hasNext = currentIndex < cards.size();
+
+                boolean hasNext;
+
+                hasNext = currentIndex < cards.size();
+
                 if (!hasNext) {
-                    lastShowTime = System.currentTimeMillis();
+                    lastShowTime = System.currentTimeMillis();//когда колода закончилась, фиксируем время
                 }
                 return hasNext;
 
@@ -98,27 +137,25 @@ public class Deck implements Iterable<Card> {
              */
             @Override
             public Card next() {
-
-
                 return cards.get(currentIndex++);
-
-
             }
-
-            public void remove() {
-
-                if (currentIndex != 0) {
-                    currentIndex -= 1;
-                }
-                cards.remove(currentIndex);
-
-
-            }
-
-
         };
     }
 
+    /**
+     * Пустая ли колода
+     *
+     * @return - булевая перенная пустоты
+     */
+    public boolean deckIsEmpty() {
+        return (cards.isEmpty());
+    }
+
+    /**
+     * Активна ли колода, или мы пока не будем её пользоваться
+     *
+     * @return - булевая переменная активности
+     */
     public boolean isActive() {
         return System.currentTimeMillis() > lastShowTime + interval;
     }
