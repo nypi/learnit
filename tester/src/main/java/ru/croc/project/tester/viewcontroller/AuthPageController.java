@@ -22,6 +22,9 @@ public class AuthPageController {
     @FXML
     private TextField userId;
 
+    public AuthPageController() throws IOException {
+    }
+
     @FXML
     public void signInButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
 
