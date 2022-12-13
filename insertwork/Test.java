@@ -1,21 +1,10 @@
 import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
+
 public class Test {
 
-    public static void OutFile(File out, String text) {
-        try {
-            FileWriter writer = new FileWriter(out, true);
-            BufferedWriter bufferWrite = new BufferedWriter(writer);
-            bufferWrite.write(text);
-            bufferWrite.newLine();
-            bufferWrite.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String ChooseAnswer(String text, String answer){
+    public static String chooseAnswer(String text, String answer){
         String[] answerMas = answer.split(",");
         Scanner in = new Scanner(System.in);
         System.out.println(text);
@@ -32,7 +21,7 @@ public class Test {
         return correctAnswer;
     }
 
-    public static int Result(File out, File question, File result, File correct) {
+    public static int result(File question, File result, File correct) {
         int amountFalse = 0;
         try (BufferedReader br_quest = new BufferedReader(new FileReader(question)))  {
             try (BufferedReader br_res = new BufferedReader(new FileReader(result))) {
@@ -44,7 +33,7 @@ public class Test {
                         String[] strings = text.split(" ");
                         for (String word : strings) {
                             if (word.matches("____")) {
-                                String thisAnswer = ChooseAnswer(text, answer);
+                                String thisAnswer = chooseAnswer(text, answer);
                                 if(Objects.equals(thisAnswer, correctAnswer)) {
                                     text = text.replace("____", thisAnswer);
                                     text += "    CORRECT!";
@@ -56,7 +45,7 @@ public class Test {
                                 }
                             }
                         }
-                        OutFile(out, text);
+                        Out.outFile(text);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -70,26 +59,13 @@ public class Test {
         return amountFalse;
     }
 
-    public static void OutputResult(File out, int fail){
-        System.out.println("Your test result:");
-        try (BufferedReader br = new BufferedReader(new FileReader(out))) {
-            String text;
-            while ((text = br.readLine()) != null) {
-                System.out.println(text);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.print("Number of mistakes: " + fail);
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args){
         File question = new File(args[0]);
         File result = new File(args[1]);
         File correct = new File(args[2]);
-        File out = new File("output.txt");
-        int amountFails = Result(out, question, result, correct);
-        OutputResult(out, amountFails);
-        out.deleteOnExit();
+
+        int amountFails = result(question, result, correct);
+        Out.outputResult(amountFails);
+        Out.delete();
     }
 }
