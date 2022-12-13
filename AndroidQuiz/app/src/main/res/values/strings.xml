@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">LearnIt</string>
+    <string name="choose_quiz">Choose a quiz</string>
+    <string name="animals">Animals</string>
+    <string name="body">Body</string>
+    <string name="family">Family</string>
+    <string name="food">Food</string>
+    <string name="start_quiz">Start quiz</string>
+    <string name="selected_topic_name">Selected Topic Name</string>
+    <string name="question_will_be_here">Question will be here</string>
+    <string name="next">Next</string>
+    <string name="your_result">Your result</string>
+    <string name="menu">Menu</string>
+    <string name="ready">Ready</string>
+</resources>
