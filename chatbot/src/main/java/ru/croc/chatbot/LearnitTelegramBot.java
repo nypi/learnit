@@ -22,29 +22,48 @@ public class LearnitTelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        try {
-            long chatId = update.getMessage().getChatId();
-            String userText = update.getMessage().getText();
-            switch (userText) {
-                case "/start":
-                    sendMessage(chatId, "Привет!");
-                    break;
-                case "/statistics":
-                    commandLine.getStats(chatId, update.getMessage().getFrom().getUserName());
-                    break;
-                case "/quiz":
-                    sendMessage(chatId, "Опрос");
-                    break;
-                case "/help":
-                    commandLine.getHelp(chatId);
-                    break;
-                default:
-                    sendMessage(chatId, "Я не понимаю эту команду \uD83D\uDE22\nВведите /help - для помощи");
-                    break;
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            try {
+                long chatId = update.getMessage().getChatId();
+                String userText = update.getMessage().getText();
+                switch (userText) {
+                    case "/start":
+                        sendMessage(getMessage(), chatId, "*Привет! Я бот Learn It! \uD83D\uDC23*\nВведите /help - для помощи");
+                        break;
+                    case "/statistics":
+                        commandLine.getStats(chatId);
+                        break;
+                    case "/quiz":
+                        sendMessage(getMessage(), chatId, "Данный тест позволяет проверить свой словарный запас!\n"
+                                        + "Вам будут выпадать разный слова, а вы должны указать их перевод.\n"
+                                        + "Удачи! Чтобы начать пиши /ready \uD83D\uDE09");
+                        break;
+                    case "/help":
+                        commandLine.getHelp(chatId);
+                        break;
+                    case "/ready":
+                        commandLine.getQuiz(chatId);
+                        break;
+                    default:
+                        sendMessage(getMessage(), chatId, "*\uD83D\uDE22 Я не понимаю эту команду*\nВведите /help - для помощи");
+                        break;
+                }
+            } catch (TelegramApiException | InstantiationException | IllegalAccessException |
+                     SQLException | ClassNotFoundException exception) {
+                throw new RuntimeException(exception);
             }
-        } catch (TelegramApiException | InstantiationException | IllegalAccessException |
-                 SQLException | ClassNotFoundException exception) {
-            throw new RuntimeException(exception);
+        } else if (update.hasCallbackQuery()) {
+            try {
+                String callBackData = update.getCallbackQuery().getData();
+                long chatId = update.getCallbackQuery().getMessage().getChatId();
+                if (commandLine.checkAnswer(chatId, callBackData)) {
+                    commandLine.addRightAnswer(chatId);
+                }
+                commandLine.nextQuestion(chatId);
+            } catch (SQLException | TelegramApiException | ClassNotFoundException |
+                     InstantiationException | IllegalAccessException exception) {
+                throw new RuntimeException(exception);
+            }
         }
     }
 
@@ -60,13 +79,23 @@ public class LearnitTelegramBot extends TelegramLongPollingBot {
 
     /**
      * Отправить сообщение
+     * @param message SendMessage
      * @param chatId chatID
      * @param textMessage текст сообщения
      */
-    public void sendMessage(long chatId, String textMessage) throws TelegramApiException {
-        SendMessage message = new SendMessage();
+    public void sendMessage(SendMessage message, long chatId, String textMessage)
+            throws TelegramApiException {
         message.setChatId(chatId);
         message.setText(textMessage);
+        message.enableMarkdown(true);
         execute(message);
+    }
+
+    /**
+     * Получить SendMessage
+     * @return SendMessage
+     */
+    public SendMessage getMessage() {
+        return new SendMessage();
     }
 }

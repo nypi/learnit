@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.256" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/back_btn_24.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/ic_launcher_background.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_big_stone_30.xml" value="0.256" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_big_stone_stroke_30.xml" value="0.256" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_gree_30.xml" value="0.278" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_green_30.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_light_big_stone_20.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_light_big_stone_20_stroke.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_red_20.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_red_30.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_white_10.xml" value="0.279" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_white_20.xml" value="0.256" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_white_30.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/drawable/round_back_white_stroke_30.xml" value="0.243" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/layout/activity_main.xml" value="0.21875" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/layout/activity_quiz.xml" value="0.23278985507246377" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/layout/activity_quiz_results.xml" value="0.23278985507246377" />
+        <entry key="..\:/Users/shari/AndroidStudioProjects/LearnIt/app/src/main/res/xml/topics.xml" value="0.12864583333333332" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
