@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * Класс окна приложения
  */
 public class Window extends JFrame {
-    private int count = 0; // кол-во попыток пользователя
+    private int count = 0; // кол-во неправильных попыток пользователя
     private final User user; // пользователь
     private TestingWords words; // слова пользователя
     private Word currentWord; // текущее слово в тесте
@@ -122,7 +122,7 @@ public class Window extends JFrame {
         menu.setVisible(false);
         panel.setVisible(false);
         end.setVisible(true);
-        JLabel txt1 = new JLabel("Количество попыток: " + count);
+        JLabel txt1 = new JLabel("Количество неудачных попыток: " + count);
         txt1.setFont(new Font("TimesRoman", Font.BOLD, 25));
         end.add(txt1);
         getContentPane().add(end);
@@ -143,6 +143,7 @@ public class Window extends JFrame {
 
     /**
      * Запуск тестового окна приложения
+     *
      * @throws IOException исключение, если файл с данными не был найден
      */
     private void testWindow() throws IOException {
@@ -165,6 +166,7 @@ public class Window extends JFrame {
                     answer.setBackground(new Color(220, 100, 100));
                     answer.setOpaque(true);
                     answer.setText("Неправильный ответ");
+                    count++;
                 } else {
                     answer.setBackground(new Color(100, 220, 100));
                     answer.setOpaque(true);
@@ -182,6 +184,7 @@ public class Window extends JFrame {
 
     /**
      * Загрузка картинки из файла по ссылке
+     *
      * @param src ссылка на картинку в файловой системе
      * @throws IOException исключение, если файл не был найден
      */
@@ -193,6 +196,7 @@ public class Window extends JFrame {
 
     /**
      * Установление значений на кнопках выбора
+     *
      * @throws IOException исключение, если файл не был найден
      */
     private void setButtons() throws IOException {
@@ -202,7 +206,6 @@ public class Window extends JFrame {
             EndWindow();
             return;
         }
-        count++;
 
         List<String> curr = new ArrayList<>();
         curr.add(currentWord.getEnglishWord());
@@ -222,6 +225,7 @@ public class Window extends JFrame {
 
     /**
      * Добавление слова в список с изученными словами
+     *
      * @param word новое изученное слово
      */
     private void addLearnedWord(Word word) {
