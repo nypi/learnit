@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class DatabaseWorker {
-    private static final String dataBaseDriver = "org.postgresql.Driver";
+    private static final String dataBaseDriver = "org.h2.Driver";
     private static final String connectionUrl = "jdbc:h2:./resources/sentences";
     private static final String user = "sa";
     private static final String password = "";
