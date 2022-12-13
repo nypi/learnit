@@ -17,7 +17,7 @@ java -jar croc-registration.jar
 ```
 (В случае отказа в доступе на Linux, можете попробовать перенести в другую папку)
 
-Также вы можете происать полный путь до jar файла
+Также вы можете прописать полный путь до jar файла
 ```
 java -jar /your/directory/croc-registration.jar
 ``` 
