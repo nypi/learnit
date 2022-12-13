@@ -129,7 +129,7 @@ Learn It — сервис, помогающий в изучении иностр
 
     Реализует - Назаров А.М.
     
-    Ссылка на проект: https://github.com/nypi/learnit/LeitnerSystemService
+    Ссылка на проект: https://github.com/nypi/learnit/tree/main/LeitnerSystemService
     
 * **...добавляйте свои сервисы...**
 
