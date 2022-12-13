@@ -2,4 +2,4 @@
 Ваня;resources/cat.png;cat;кот;1
 Ваня;resources/toad.png;toad;жаба;1
 Ваня;resources/shrek.png;shrek;шрек;4
-Ваня;resources/boot.png;boot;ботинок;2
+Ваня;resources/flower.png;flower;цветок;2
