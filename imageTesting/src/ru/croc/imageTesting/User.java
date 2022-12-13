@@ -6,19 +6,38 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс пользователя
+ *
+ * @author Ермишова СМ
+ */
 public class User {
     private final String src;
-    private String username;
+    private String username = "";
     List<Word> words = new ArrayList<>();
 
+    /**
+     * @param src ссылка на файл с данными о пользователе
+     */
     public User(String src) {
         this.src = src;
     }
 
+    /**
+     * Установить имя пользователя
+     *
+     * @param username новое имя пользователя
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Нахождение всех слов пользователя из файла
+     *
+     * @throws IOException              выбрасывается, если файл не найден
+     * @throws UserDoesntExistException выбрасывается, если пользователя нет в файле
+     */
     public void findUserWords() throws IOException, UserDoesntExistException {
         BufferedReader file = new BufferedReader(new FileReader(src));
         String line, currentName;
@@ -38,6 +57,11 @@ public class User {
         }
     }
 
+    /**
+     * Получение всех слов пользователя
+     *
+     * @return список элементов типа Word
+     */
     public List<Word> getWords() {
         return words;
     }

@@ -12,21 +12,27 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Класс окна приложения
+ */
 public class Window extends JFrame {
-    private int count = 0;
-    private final User user;
-    private TestingWords words;
-    private Word currentWord;
-    private final List<JButton> options = new ArrayList<>();
+    private int count = 0; // кол-во попыток пользователя
+    private final User user; // пользователь
+    private TestingWords words; // слова пользователя
+    private Word currentWord; // текущее слово в тесте
+
+    private final List<JButton> options = new ArrayList<>(); // кнопки выбора слова
     private final Logger log = Logger.getLogger(Window.class.getName());
     private final List<Word> learnedWords = new ArrayList<>();
-
     private final JPanel menu = new JPanel(), panel = new JPanel(), end = new JPanel();
     private final JLabel picLabel = new JLabel(), answer = new JLabel("");
     private final JTextField txt1 = new JTextField(), txt2 = new JTextField();
     private final JButton startButton = new JButton("начать");
 
 
+    /**
+     * @param user информация о текущем пользователе
+     */
     public Window(User user) {
         super("Тесты по картинкам");
         this.user = user;
@@ -35,6 +41,13 @@ public class Window extends JFrame {
         mainWindow();
     }
 
+    public List<Word> getLearnedWords() {
+        return this.learnedWords;
+    }
+
+    /**
+     * настройки кнопок
+     */
     private void buttonSettings() {
         Font font = new Font("TimesRoman", Font.BOLD, 30);
         answer.setFont(font);
@@ -56,6 +69,9 @@ public class Window extends JFrame {
         }
     }
 
+    /**
+     * инициализация окна меню приложения
+     */
     private void initMenu() {
         JLabel label1 = new JLabel("Введите имя пользователя: ");
         JLabel label2 = new JLabel("Введите кол-во тестов: ");
@@ -73,12 +89,15 @@ public class Window extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * запуск окна меню приложения
+     */
     private void mainWindow() {
         menu.setVisible(true);
         panel.setVisible(false);
         startButton.addActionListener(e -> {
+            // ввод имени пользователя, полученного из приложения
             user.setUsername(txt1.getText());
-
             try {
                 user.findUserWords();
                 List<Word> userWords = user.getWords();
@@ -90,12 +109,15 @@ public class Window extends JFrame {
                 log.info(ex.getMessage());
             } catch (NumberFormatException ex) {
                 log.info("Должно быть введено целочисленное значение");
-            } catch (InputNumberException ex) {
+            } catch (TestsNumberException ex) {
                 log.info(ex.getMessage());
             }
         });
     }
 
+    /**
+     * запуск конечного окна приложения
+     */
     private void EndWindow() {
         menu.setVisible(false);
         panel.setVisible(false);
@@ -104,10 +126,13 @@ public class Window extends JFrame {
         txt1.setFont(new Font("TimesRoman", Font.BOLD, 25));
         end.add(txt1);
         getContentPane().add(end);
-
+        printLearnedWords();
     }
 
-    private void initTestPanel() {
+    /**
+     * Инициализация тестового окна приложения
+     */
+    private void initTestWindow() {
         panel.add(picLabel);
         for (JButton btn : options) {
             panel.add(btn);
@@ -116,17 +141,25 @@ public class Window extends JFrame {
         getContentPane().add(panel);
     }
 
+    /**
+     * Запуск тестового окна приложения
+     * @throws IOException исключение, если файл с данными не был найден
+     */
     private void testWindow() throws IOException {
-        initTestPanel();
+        initTestWindow();
         menu.setVisible(false);
         panel.setVisible(true);
         setButtons();
         choiceButtonsAction();
     }
 
+    /**
+     * Принятие сигналов с кнопок
+     */
     private void choiceButtonsAction() {
         for (JButton btn : options) {
             btn.addActionListener(e -> {
+                // сравниваем текущее тестовое слово с выбором пользователя
                 if (!btn.getText().equals(currentWord.getEnglishWord())) {
                     words.addCurrentWordInQueue();
                     answer.setBackground(new Color(220, 100, 100));
@@ -147,12 +180,21 @@ public class Window extends JFrame {
         }
     }
 
-    public void loadImage(String src) throws IOException {
+    /**
+     * Загрузка картинки из файла по ссылке
+     * @param src ссылка на картинку в файловой системе
+     * @throws IOException исключение, если файл не был найден
+     */
+    private void loadImage(String src) throws IOException {
         BufferedImage master = ImageIO.read(new File(src));
         Image scaled = master.getScaledInstance(400, 400, java.awt.Image.SCALE_SMOOTH);
         picLabel.setIcon(new ImageIcon(scaled));
     }
 
+    /**
+     * Установление значений на кнопках выбора
+     * @throws IOException исключение, если файл не был найден
+     */
     private void setButtons() throws IOException {
         currentWord = words.next();
 
@@ -161,6 +203,7 @@ public class Window extends JFrame {
             return;
         }
         count++;
+
         List<String> curr = new ArrayList<>();
         curr.add(currentWord.getEnglishWord());
         Word appendWord = words.getRandomWord();
@@ -177,12 +220,22 @@ public class Window extends JFrame {
         }
     }
 
+    /**
+     * Добавление слова в список с изученными словами
+     * @param word новое изученное слово
+     */
     private void addLearnedWord(Word word) {
+        // повышаем коэфф изученности в слова
         word.increaseKnowledgeDegree();
         learnedWords.add(word);
     }
 
-    public List<Word> getLearnedWords() {
-        return this.learnedWords;
+    /**
+     * вывод на экран всех изученных слов пользователя
+     */
+    private void printLearnedWords() {
+        for (Word word : getLearnedWords()) {
+            System.out.println(word);
+        }
     }
 }
