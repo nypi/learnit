@@ -69,7 +69,7 @@ public class WordMatcher {
                 break;
             }
             else {
-                System.out.println("Wrong, try again! You have " + (countTry - counter - 1) + " attempts");
+                if (countTry - counter - 1 > 0) System.out.println("Wrong, try again! You have " + (countTry - counter - 1) + " attempts");
             }
             counter++;
         }
